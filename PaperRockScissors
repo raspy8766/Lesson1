@@ -1,26 +1,63 @@
-puts "Please input your first number"
-num1 = gets.chomp.to_i
+play = String.new
+until play == "n" 
+		
+	p "Paper Rock Scissors"
+	p "Choose one: (P/R/S)"
+	prs = gets.chomp.downcase
 
-puts "Please inputs your second number"
-num2 = gets.chomp.to_i
+	until prs = "p" || prs = "r" || prs = "s"
+		p "--------Try Again--------"
+		p
+		p"Choose one: (P/R/S)"
+		prs = gets.chomp.downcase
+	end
 
-p "Choose an operator (1 = addition, 2 = subtraction, 3 = multiplication, 4 = division"
-operator = gets.chomp.to_i
+	comp = Random.new
+	comp = comp.rand(3)
 
-until operator == 1 || operator == 2 || operator == 3 || operator == 4
+	#paper = 0
+	#rock = 1
+	#scissors = 2
 
-	p "--------------Invalid Selection--------------"
-	p "Try again: (1 = addition, 2 = subtraction, 3 = multiplication, 4 = division"
-	operator = gets.chomp.to_i
-end	
-
-
-if operator == 1 
-	puts "the sum of the numbers is: #{num1 + num2}"
-elsif operator == 2
-	puts "the difference of the numbers is: #{num1 - num2}"
-elsif operator == 3
-	puts "the product of the numbers is: #{num1 * num2}"
-else
-	puts "the quotient of the numbers is: #{num1 / num2.to_f}"
+	case prs
+	when "p"
+		case comp
+		when 0
+			p "----Computer chose Paper!----"
+			p "It's a Tie"
+		when 1
+			p "----Computer chose Rock!----"
+			p "You Win!"
+		else
+			p "----Computer chose Scissors!----"
+			p "You Lose"
+		end
+	when "r"
+		case comp
+		when 0
+			p "----Computer chose Paper!----"
+			p "You Lose"
+		when 1
+			p "----Computer chose Rock!----"
+			p "It's a Tie"
+		else
+			p "----Computer chose Scissors!----"
+			p "You Win!"
+		end
+	when "s"
+		case comp
+		when 0
+			p "----Computer chose Paper!----"
+			p "You Win!"
+		when 1
+			p "----Computer chose Rock!----"
+			p "You Lose"
+		else
+			p "----Computer chose Sicssors!----"
+			p "It's a tie"
+		end
+	end
+p "Play Again? (Y/N)"
+play = gets.chomp.downcase
+	if play == "n" then p "Goodbye!" end
 end
