@@ -1,0 +1,91 @@
+#1. the program will display board empty
+#2. create a hash that corresponds numbers 1-9 to areas on
+# the board
+#3. the program will accept an input from user 1-9
+#4. computer will randomly choose a square
+#5. check to see if there is a winner
+#6. check to see if there is any empty spaces
+#7. if there is a winner or an empty space then end loop
+#8. display winner if there is a winner
+#9. else display its a tie
+#10. inputs will also need to be verified that they are 
+# on and empty space 
+
+
+
+def display_board(board)
+  system 'clear'
+  puts "     |     |     "
+  puts "  #{board[1]}  |  #{board[2]}  |  #{board[3]}  "
+  puts "     |     |     "
+  puts "-----+-----+-----"
+  puts "     |     |     "
+  puts "  #{board[4]}  |  #{board[5]}  |  #{board[6]}  "
+  puts "     |     |     "
+  puts "-----+-----+-----"
+  puts "     |     |     "
+  puts "  #{board[7]}  |  #{board[8]}  |  #{board[9]}  "
+  puts "     |     |     "
+end
+
+def initialize_board(board)
+  board = {}
+  (1..9).each {|position| board[position] = " "}
+  board
+end
+
+def empty_space(board)
+  board.keys.select { |position| board[position] == " " }
+
+end
+
+def player_input(board)
+  puts "choose a spot (1-9)"
+  begin 
+    position = gets.chomp.to_i
+  end until empty_space(board).include?(position)
+  board[position] = "X"
+end
+
+def check_winner(board)
+  winning_lines = [1, 2, 3], [1, 4, 7], [2, 5, 8], [3, 6, 9], [4, 5, 6], [7, 8, 9]
+  winning_lines.each do |line|
+    return "player" if board.values_at(*line).count("X") == 3
+    return "the computer" if board.values_at(*line).count("O") == 3
+  end
+  nil
+end
+
+def computer_input(board)
+  position = empty_space(board).sample
+  board[position] = "O"
+  board
+end
+  
+def filled_up?(board)
+  empty_space(board) == []
+end
+
+def winner(board)
+  if check_winner(board) == "player"
+    puts "Congratulations, you win!"
+  else
+    puts "Sorry you lose"
+  end
+end
+
+
+board = initialize_board(board)
+display_board(board)
+begin
+  player_input(board)
+  check_winner(board)
+  filled_up?(board)
+  display_board(board)
+  computer_input(board)
+  check_winner(board)
+  filled_up?(board)
+  display_board(board)
+end until check_winner(board) || filled_up?(board)
+winner(board)
+
