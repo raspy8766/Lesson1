@@ -20,7 +20,6 @@
 #puts "Enter Name"
 #player_name = gets.chomp
 
-require 'pry'
 
 def create_deck
   cards = {}
@@ -56,10 +55,10 @@ def continue?(playervalue, dealervalue, playername)
     return "BlackJack, The Dealer Wins."
   elsif playervalue == 21 
     return "BlackJack, #{playername} Wins!"
-  elsif dealervalue > 21
-    return "The Dealer Busted"
   elsif playervalue > 21
     return "Sorry #{playername}, you are over 21."
+  elsif dealervalue > 21
+    return "The Dealer Busted"
   end
   nil
 end 
