@@ -39,6 +39,8 @@ def compile_deck
   deck = hearts.merge(diamonds)
   deck = deck.merge(clubs)
   deck = deck.merge(spades)
+  deck2 = deck
+  deck = deck.merge(deck2)
 end
 
 def deal_cards(deck, n)
